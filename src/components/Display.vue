@@ -1,12 +1,16 @@
 <template>
-  <div
-    :class="[
-      'display',
-      current.length > 12 ?  'is-long' : '',
-      current.length > 16 ?  'is-longer' : '',
-    ]">
-      <p class="display-number">{{ current }}</p>
-    </div>
+  <div class="display">
+    <p
+      :class="[
+        'display-number',
+        current.length > 12 ?  'is-long' : '',
+        current.length > 16 ?  'is-longer' : '',
+        current.length > 18 ?  'is-scrolled' : '',
+      ]"
+    >
+      {{ current }}
+    </p>
+  </div>
 </template>
 
 <script lang="ts">
@@ -29,15 +33,18 @@ export default class Display extends Vue {
     line-height: 1;
     display: flex;
     align-items: flex-end;
-    &.is-long {
-      font-size: map-get($fontSize, displayLong);
-    }
-    &.is-longer {
-      font-size: map-get($fontSize, displayLonger);
-    }
     &-number {
       flex-basis: 100%;
       margin: 0;
+      &.is-scrolled {
+        overflow-y: scroll;
+      }
+      &.is-long {
+        font-size: map-get($fontSize, displayLong);
+      }
+      &.is-longer {
+        font-size: map-get($fontSize, displayLonger);
+      }
     }
   }
 </style>

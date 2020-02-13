@@ -23,8 +23,6 @@ export default class CalculatorStore {
   updateDisplay (number: string) {
     if (number === '.' && this.current.indexOf('.') > -1) return
 
-    if (this.current.length > 18) return
-
     if (this.operator && this.shouldClearDisplay) {
       this.current = '0'
       this.shouldClearDisplay = false
