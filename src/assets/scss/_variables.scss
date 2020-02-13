@@ -1,0 +1,43 @@
+* {
+  box-sizing: border-box;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+$backgroundColors: (
+  base: #222831,
+  display: #393E46,
+);
+
+$defaultButtonColor: (
+  color: #fff,
+  background: #e8831c,
+);
+
+$actionButtonColor: (
+  color: #111,
+  background: #aaa,
+);
+  
+$numberButtonColor: (
+  color: #111,
+  background: #ddd,
+);
+
+$fontSize: (
+  title: 3.2rem,
+  display: 4rem,
+  displayLong: 3rem,
+  displayLonger: 2.5rem,
+  btn: 1.8rem,
+);
+
+$buttonSize: 70px;
