@@ -27,7 +27,10 @@
           />
         </li>
         <li class="btns-item">
-          <button class="btn btn-numbers">
+          <button
+            class="btn btn-numbers"
+            @click="deleteLastNumber"
+          >
             <svg clip-rule="evenodd" fill-rule="evenodd" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="m7 5h17v16h-17l-7-7.972zm7 6.586-2.586-2.586-1.414 1.414 2.586 2.586-2.586 2.586 1.414 1.414 2.586-2.586 2.586 2.586 1.414-1.414-2.586-2.586 2.586-2.586-1.414-1.414z"/></svg>
           </button>
         </li>
