@@ -4,7 +4,6 @@
     <div class="calculator">
       <Display
         :current="this.current"
-        @delete="deleteLastNumber"
       />
       <Buttons
         :numbers="this.numbers"
