@@ -1,7 +1,7 @@
 <template>
   <div>
-    <Title title="Calcurator" />
-    <div class="T-calculator">
+    <Title title="T-Calcurator" />
+    <div class="calculator">
       <Display
         :current="this.current"
         @updateDisplay="updateDisplay"
