@@ -2,6 +2,8 @@
 const path = require("path");
 
 module.exports = {
+  publicPath: '/t-calc/',
+  outputDir: 'docs',
   chainWebpack: config => {
     const oneOfsMap = config.module.rule('scss').oneOfs.store
     oneOfsMap.forEach(item => {
