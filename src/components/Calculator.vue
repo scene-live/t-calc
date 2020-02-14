@@ -4,6 +4,7 @@
     <div class="calculator">
       <Display
         :current="this.current"
+        @updateDisplay="updateDisplay"
       />
       <Buttons
         :numbers="this.numbers"

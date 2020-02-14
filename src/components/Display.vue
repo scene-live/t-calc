@@ -1,15 +1,18 @@
 <template>
   <div class="display">
-    <p
+    <input
+      type="text"
       :class="[
         'display-number',
-        current.length > 12 ?  'is-long' : '',
-        current.length > 16 ?  'is-longer' : '',
+        current.length > 11 ?  'is-long' : '',
+        current.length > 15 ?  'is-longer' : '',
         current.length > 18 ?  'is-scrolled' : '',
       ]"
+      ref="display"
+      :value="current"
+      @input="updateDisplay"
+      @blur="setFocus"
     >
-      {{ current }}
-    </p>
   </div>
 </template>
 
@@ -19,6 +22,29 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 @Component
 export default class Display extends Vue {
   @Prop() private current!: string;
+
+  mounted () {
+    this.setFocus()
+  }
+
+  getInput () {
+    return this.$refs.display as HTMLInputElement
+  }
+
+  setFocus () {
+    const input = this.getInput()
+    input.focus()
+    input.setSelectionRange(input.value.length, input.value.length)
+  }
+
+  updateDisplay () {
+    const value = this.current === '0'
+      ? this.getInput().value
+      : this.getInput().value.slice(this.current.length)
+
+    this.$emit('updateDisplay', value)
+    this.setFocus()
+  }
 }
 </script>
 
@@ -29,13 +55,25 @@ export default class Display extends Vue {
     background: map-get($backgroundColors, display);
     color: #fff;
     font-size: map-get($fontSize, display);
-    min-height: 65px;
     line-height: 1;
     display: flex;
     align-items: flex-end;
     &-number {
-      flex-basis: 100%;
       margin: 0;
+      flex-basis: 100%;
+      width: 100%;
+      min-height: 65px;
+      display: block;
+      appearance: none;
+      text-align: right;
+      color: #fff;
+      font-size: map-get($fontSize, display);
+      line-height: 1;
+      border: none;
+      background: transparent;
+      &:focus {
+        outline: none;
+      }
       &.is-scrolled {
         overflow-y: scroll;
       }
