@@ -31,6 +31,13 @@ export default class CalculatorStore {
     this.current = (this.current === '0' && number !== '.')
       ? number
       : this.current + number
+
+    if (number.length > 1 &&
+      number.indexOf('0') === 0 &&
+      number.indexOf('.') !== 1
+    ) {
+      this.current = this.current.slice(1)
+    }
   }
 
   deleteLastNumber () {
