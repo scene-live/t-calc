@@ -39,6 +39,7 @@ export default class Display extends Vue {
 
   updateDisplay () {
     this.$emit('updateDisplay', this.getInput().value, true)
+    this.$forceUpdate()
     this.setFocus()
   }
 }
