@@ -17,6 +17,10 @@ export default class CalculatorStore {
     return this.current
   }
 
+  getOperator () {
+    return this.operator
+  }
+
   getErrors () {
     return this.errors
   }

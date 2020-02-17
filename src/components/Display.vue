@@ -1,5 +1,6 @@
 <template>
   <div class="display">
+    <p class="display-operator">{{ operator }}</p>
     <input
       type="text"
       :class="[
@@ -22,6 +23,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 @Component
 export default class Display extends Vue {
   @Prop() private current!: string;
+  @Prop() private operator!: string;
 
   mounted () {
     this.setFocus()
@@ -55,6 +57,19 @@ export default class Display extends Vue {
     line-height: 1;
     display: flex;
     align-items: flex-end;
+    position: relative;
+    &-operator {
+      font-size: 1.5rem;
+      color: map-get($backgroundColors, display);
+      text-align: center;
+      margin: 0;
+      position: absolute;
+      width: 1em;
+      background: #fff;
+      border-radius: 3px;
+      top: 5px;
+      right: 5px;
+    }
     &-number {
       margin: 0;
       flex-basis: 100%;

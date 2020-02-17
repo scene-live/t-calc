@@ -12,6 +12,7 @@
     <div class="calculator">
       <Display
         :current="current"
+        :operator="operator"
         @updateDisplay="updateDisplay"
       />
       <Buttons
@@ -44,16 +45,18 @@ import Buttons from './Buttons.vue'
 export default class Calculator extends Vue {
   @Prop() private title!: string;
 
-  store = new CalculatorStore();
+  store = new CalculatorStore()
 
-  current = this.store.getCurrent();
+  current = this.store.getCurrent()
+  operator = this.store.getOperator()
+  errors = this.store.getErrors()
   numbers = CalculatorStore.NUMBERS
   operators = CalculatorStore.OPERATORS
   actions = CalculatorStore.ACTIONS
-  errors = this.store.getErrors();
 
   update () {
     this.current = this.store.getCurrent()
+    this.operator = this.store.getOperator()
     this.errors = this.store.getErrors()
   }
 
