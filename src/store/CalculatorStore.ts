@@ -3,16 +3,22 @@ export default class CalculatorStore {
   private temp: number;
   private operator: string;
   private shouldClearDisplay: boolean;
+  private errors: string[]
 
   constructor () {
     this.current = '0'
     this.temp = 0
     this.operator = ''
     this.shouldClearDisplay = false
+    this.errors = []
   }
 
   getCurrent () {
     return this.current
+  }
+
+  getErrors () {
+    return this.errors
   }
 
   // advice: NUMBERS ではなく NUMERIC＿KEYPAD など
@@ -30,7 +36,12 @@ export default class CalculatorStore {
   }
 
   pushNumberButton (value: string) {
-    if (value === '.' && this.current.indexOf('.') > -1) return
+    if (value === '.' && this.current.indexOf('.') > -1) {
+      this.addError('小数点は2つ以上入力できません。')
+      return
+    }
+
+    this.errors = []
 
     if (this.operator && this.shouldClearDisplay) {
       this.current = '0'
@@ -43,9 +54,17 @@ export default class CalculatorStore {
   }
 
   inputNumber (value: string) {
-    if (!(/^[-]?[0-9.]*$/.test(value))) return
+    if (!(/^[-]?[0-9.]*$/.test(value))) {
+      this.addError('半角数字と小数点以外は入力できません。')
+      return
+    }
 
-    if (value.split('.').length > 2) return
+    if (value.split('.').length > 2) {
+      this.addError('小数点は2つ以上入力できません。')
+      return
+    }
+
+    this.errors = []
 
     if (value === '' && this.current.length === 1) {
       this.current = '0'
@@ -61,6 +80,10 @@ export default class CalculatorStore {
     this.current = this.current === '0' && value.indexOf('.') < 0
       ? value.slice(1)
       : value
+  }
+
+  addError (message: string) {
+    if (this.errors.indexOf(message) < 0) this.errors.push(message)
   }
 
   deleteLastNumber () {
@@ -82,6 +105,7 @@ export default class CalculatorStore {
     this.current = '0'
     this.temp = 0
     this.operator = ''
+    this.errors = []
     this.shouldClearDisplay = false
   }
 

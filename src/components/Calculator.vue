@@ -1,6 +1,14 @@
 <template>
   <div>
     <Title title="T-Calcurator" />
+    <ul class="calculator-errors">
+      <li
+        v-for="(error, index) in errors"
+        :key="index"
+      >
+        {{ error }}
+      </li>
+    </ul>
     <div class="calculator">
       <Display
         :current="current"
@@ -42,9 +50,11 @@ export default class Calculator extends Vue {
   numbers = CalculatorStore.NUMBERS
   operators = CalculatorStore.OPERATORS
   actions = CalculatorStore.ACTIONS
+  errors = this.store.getErrors();
 
   update () {
     this.current = this.store.getCurrent()
+    this.errors = this.store.getErrors()
   }
 
   updateDisplay (number: string, isInput: boolean) {
@@ -79,6 +89,14 @@ export default class Calculator extends Vue {
     border-bottom: 1px solid map-get($backgroundColors, base);
     &-title {
       font-size: map-get($fontSize, title);
+    }
+    &-errors {
+      width: $buttonSize * 4 + 1;
+      margin: 0 auto;
+      text-align: left;
+      color: #EA3B54;
+      font-size: map-get($fontSize, errors);
+      font-weight: bold;
     }
   }
 </style>
