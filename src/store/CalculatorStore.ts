@@ -43,6 +43,8 @@ export default class CalculatorStore {
   }
 
   inputNumber (value: string) {
+    if (value.split('.').length > 2) return
+
     if (value === '' && this.current.length === 1) {
       this.current = '0'
       return
