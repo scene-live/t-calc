@@ -18,7 +18,7 @@
         <li
           v-for="(number, index) in numbers"
           :key="index"
-          :class="[ 'btns-item', number === 0 ? '' : '']"
+          class="btns-item"
         >
           <Button
             :text="number"
@@ -44,7 +44,7 @@
       >
         <Button
           :text="operator"
-          className="btn-operators"
+          :className="[ 'btn-operators', addActiveClass(operator) ]"
           @pushButton="pushOperationButton"
         />
       </li>
@@ -62,9 +62,14 @@ import Button from './Button.vue'
   }
 })
 export default class Buttons extends Vue {
+  @Prop() private operator!: string;
   @Prop() private numbers!: [];
   @Prop() private operators!: [];
   @Prop() private actions!: [];
+
+  addActiveClass (operator: string) {
+    if (operator === this.operator) return 'is-active'
+  }
 
   updateDisplay (value: string) {
     this.$emit('pushNumber', value)

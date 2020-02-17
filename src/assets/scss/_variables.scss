@@ -41,6 +41,10 @@ html {
     color: #fff;
     background: $attentionColor;
   }
+  &.is-active {
+    color: #fff;
+    background: complement(map-get($defaultButtonColor, background))
+  }
 }
 
 $backgroundColors: (
@@ -62,6 +66,8 @@ $numberButtonColor: (
   color: #111,
   background: #ddd,
 );
+
+$attentionColor: #eb1e3d;
 
 $fontSize: (
   title: 3.2rem,

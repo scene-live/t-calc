@@ -16,6 +16,7 @@
         @updateDisplay="updateDisplay"
       />
       <Buttons
+        :operator="operator"
         :numbers="numbers"
         :operators="operators"
         :actions="actions"
@@ -97,7 +98,7 @@ export default class Calculator extends Vue {
       width: $buttonSize * 4 + 1;
       margin: 0 auto;
       text-align: left;
-      color: #EA3B54;
+      color: $attentionColor;
       font-size: map-get($fontSize, errors);
       font-weight: bold;
     }
