@@ -12,7 +12,6 @@
     <div class="calculator">
       <Display
         :current="current"
-        :operator="operator"
         @updateDisplay="updateDisplay"
       />
       <Buttons
