@@ -20,34 +20,43 @@ export default class CalculatorStore {
   static OPERATORS = ['÷', '×', '-', '+', '=']
   static ACTIONS = ['AC', '+/-', '%']
 
-  updateDisplay (number: string, isInput: boolean) {
-    if (number === '.' && this.current.indexOf('.') > -1) return
-
-    if (number === '' && this.current.length === 1) {
-      this.current = '0'
-      return
-    }
-
+  updateDisplay (value: string, isInput = false) {
     if (isInput) {
-      if (this.shouldClearDisplay) {
-        this.current = number.slice(this.current.length)
-        this.shouldClearDisplay = false
-        return
-      }
-      this.current = this.current === '0' && number.indexOf('.') < 0
-        ? number.slice(1)
-        : number
+      this.inputNumber(value)
       return
     }
+
+    this.pushNumberButton(value)
+  }
+
+  pushNumberButton (value: string) {
+    if (value === '.' && this.current.indexOf('.') > -1) return
 
     if (this.operator && this.shouldClearDisplay) {
       this.current = '0'
       this.shouldClearDisplay = false
     }
 
-    this.current = (this.current === '0' && number !== '.')
-      ? number
-      : this.current + number
+    this.current = (this.current === '0' && value !== '.')
+      ? value
+      : this.current + value
+  }
+
+  inputNumber (value: string) {
+    if (value === '' && this.current.length === 1) {
+      this.current = '0'
+      return
+    }
+
+    if (this.operator && this.shouldClearDisplay) {
+      this.current = value.slice(this.current.length)
+      this.shouldClearDisplay = false
+      return
+    }
+
+    this.current = this.current === '0' && value.indexOf('.') < 0
+      ? value.slice(1)
+      : value
   }
 
   deleteLastNumber () {
