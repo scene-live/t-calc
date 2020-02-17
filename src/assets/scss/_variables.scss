@@ -37,6 +37,10 @@ html {
     color: map-get($actionButtonColor, color);
     background: map-get($actionButtonColor, background);
   }
+  &.is-clear {
+    color: #fff;
+    background: $attentionColor;
+  }
 }
 
 $backgroundColors: (

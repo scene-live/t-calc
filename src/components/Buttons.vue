@@ -9,7 +9,7 @@
         >
           <Button
             :text="action"
-            className="btn-actions"
+            :className="['btn-actions', action === 'AC' ? 'is-clear' : '']"
             @pushButton="pushActionButton"
           />
         </li>
