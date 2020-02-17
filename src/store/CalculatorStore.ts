@@ -41,7 +41,10 @@ export default class CalculatorStore {
   }
 
   deleteLastNumber () {
-    if (this.current.length === 1) return
+    if (this.current.length === 1) {
+      this.current = '0'
+      return
+    }
 
     this.current = this.current.slice(0, -1)
   }
