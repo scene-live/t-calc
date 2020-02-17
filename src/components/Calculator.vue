@@ -3,13 +3,13 @@
     <Title title="T-Calcurator" />
     <div class="calculator">
       <Display
-        :current="this.current"
+        :current="current"
         @updateDisplay="updateDisplay"
       />
       <Buttons
-        :numbers="this.numbers"
-        :operators="this.operators"
-        :actions="this.actions"
+        :numbers="numbers"
+        :operators="operators"
+        :actions="actions"
         @pushNumber="updateDisplay"
         @delete="deleteLastNumber"
         @pushAction="pushActionButton"
@@ -47,8 +47,8 @@ export default class Calculator extends Vue {
     this.current = this.store.getCurrent()
   }
 
-  updateDisplay (number: string) {
-    this.store.updateDisplay(number)
+  updateDisplay (number: string, isInput: boolean) {
+    this.store.updateDisplay(number, isInput)
     this.update()
   }
 

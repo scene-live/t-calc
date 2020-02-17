@@ -20,8 +20,25 @@ export default class CalculatorStore {
   static OPERATORS = ['÷', '×', '-', '+', '=']
   static ACTIONS = ['AC', '+/-', '%']
 
-  updateDisplay (number: string) {
+  updateDisplay (number: string, isInput: boolean) {
     if (number === '.' && this.current.indexOf('.') > -1) return
+
+    if (number === '' && this.current.length === 1) {
+      this.current = '0'
+      return
+    }
+
+    if (isInput) {
+      if (this.shouldClearDisplay) {
+        this.current = number.slice(this.current.length)
+        this.shouldClearDisplay = false
+        return
+      }
+      this.current = this.current === '0' && number.indexOf('.') < 0
+        ? number.slice(1)
+        : number
+      return
+    }
 
     if (this.operator && this.shouldClearDisplay) {
       this.current = '0'
@@ -31,13 +48,6 @@ export default class CalculatorStore {
     this.current = (this.current === '0' && number !== '.')
       ? number
       : this.current + number
-
-    if (number.length > 1 &&
-      number.indexOf('0') === 0 &&
-      number.indexOf('.') !== 1
-    ) {
-      this.current = this.current.slice(1)
-    }
   }
 
   deleteLastNumber () {
