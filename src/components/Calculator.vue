@@ -43,8 +43,6 @@ import Buttons from './Buttons.vue'
   }
 })
 export default class Calculator extends Vue {
-  @Prop() private title!: string;
-
   store = new CalculatorStore()
 
   current = this.store.getCurrent()

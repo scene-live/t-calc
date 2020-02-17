@@ -2,7 +2,7 @@
   <div id="app">
     <!-- <button @click="changeText">Click</button>
     <HelloWorld :text="text" msg="Welcome to Your Vue.js + TypeScript App" /> -->
-    <Calculator title="Calculator" />
+    <Calculator />
   </div>
 </template>
 
