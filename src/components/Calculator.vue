@@ -60,8 +60,8 @@ export default class Calculator extends Vue {
     this.errors = this.store.getErrors()
   }
 
-  updateDisplay (number: string, isInput: boolean) {
-    this.store.updateDisplay(number, isInput)
+  updateDisplay (value: string, isInput: boolean) {
+    this.store.updateDisplay(value, isInput)
     this.update()
   }
 

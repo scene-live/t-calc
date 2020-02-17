@@ -66,8 +66,8 @@ export default class Buttons extends Vue {
   @Prop() private operators!: [];
   @Prop() private actions!: [];
 
-  updateDisplay (number: string) {
-    this.$emit('pushNumber', number)
+  updateDisplay (value: string) {
+    this.$emit('pushNumber', value)
   }
 
   deleteLastNumber () {
@@ -78,8 +78,8 @@ export default class Buttons extends Vue {
     this.$emit('pushAction', action)
   }
 
-  pushOperationButton (action: string) {
-    this.$emit('pushOperation', action)
+  pushOperationButton (operator: string) {
+    this.$emit('pushOperation', operator)
   }
 }
 </script>
