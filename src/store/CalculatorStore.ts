@@ -43,7 +43,7 @@ export default class CalculatorStore {
   }
 
   inputNumber (value: string) {
-    if (!(/^[-]?[0-9.]+$/.test(value))) return
+    if (!(/^[-]?[0-9.]*$/.test(value))) return
 
     if (value.split('.').length > 2) return
 
