@@ -1,5 +1,6 @@
 <template>
   <div class="display">
+    <p class="display-formula">123 + 23</p>
     <input
       type="text"
       :class="[
@@ -56,17 +57,12 @@ export default class Display extends Vue {
     display: flex;
     align-items: flex-end;
     position: relative;
-    &-operator {
+    &-formula {
       font-size: 1.5rem;
-      color: map-get($backgroundColors, display);
-      text-align: center;
       margin: 0;
       position: absolute;
-      width: 1em;
-      background: #fff;
-      border-radius: 3px;
-      top: 5px;
-      right: 5px;
+      top: 10px;
+      right: 10px;
     }
     &-number {
       margin: 0;
