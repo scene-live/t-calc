@@ -11,14 +11,7 @@
       <label for="toggleHistory">計算履歴を常に表示する</label>
     </p>
     <div class="calculator-wrap" ref="calculatorWrap">
-      <ul class="calculator-errors">
-        <li
-          v-for="(error, index) in errors"
-          :key="index"
-        >
-          {{ error }}
-        </li>
-      </ul>
+      <Errors :errors="errors" />
       <div class="calculator">
         <Display
           :current="current"
@@ -48,6 +41,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 import CalculatorStore from '../store/CalculatorStore'
 import Title from './Title.vue'
 import Display from './Display.vue'
+import Errors from './Errors.vue'
 import Buttons from './Buttons.vue'
 import History from './History.vue'
 
@@ -55,6 +49,7 @@ import History from './History.vue'
   components: {
     Title,
     Display,
+    Errors,
     Buttons,
     History
   }
@@ -125,17 +120,6 @@ export default class Calculator extends Vue {
     }
     &-title {
       font-size: map-get($fontSize, title);
-    }
-    &-errors {
-      width: $buttonSize * 4 + 1;
-      margin: 0 auto;
-      text-align: left;
-      color: $attentionColor;
-      font-size: map-get($fontSize, errors);
-      font-weight: bold;
-      .is-history & {
-        flex-basis: 100%;
-      }
     }
   }
   .toggleHistory {
