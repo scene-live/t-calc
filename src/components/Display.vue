@@ -57,8 +57,9 @@ export default class Display extends Vue {
     display: flex;
     align-items: flex-end;
     position: relative;
+    z-index: 100;
     &-formula {
-      font-size: 1.5rem;
+      font-size: map-get($fontSize, history);
       margin: 0;
       position: absolute;
       top: 10px;

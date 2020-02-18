@@ -23,8 +23,10 @@ html {
   background: map-get($defaultButtonColor, background);
   font-size: map-get($fontSize, btn);
   cursor: pointer;
-  &:hover {
-    opacity: .8;
+  @media #{$not_sp} {
+    &:hover {
+      opacity: .8;
+    }
   }
   &:focus {
     outline: none;
@@ -46,6 +48,9 @@ html {
     background: complement(map-get($defaultButtonColor, background))
   }
 }
+
+$sp: "only screen and (max-width: 767px)";
+$not_sp: "only screen and (min-width: 768px)";
 
 $backgroundColors: (
   base: #222831,
@@ -75,7 +80,10 @@ $fontSize: (
   displayLong: 3rem,
   displayLonger: 2.5rem,
   btn: 1.8rem,
+  history: 1.5rem,
   errors: 1.4rem,
 );
 
 $buttonSize: 70px;
+$buttonHeight: $buttonSize * .8;
+$buttonAreaHeight: $buttonHeight * 6;
