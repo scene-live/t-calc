@@ -10,15 +10,15 @@
       >
       <label for="toggleHistory">計算履歴を常に表示する</label>
     </p>
-    <ul class="calculator-errors">
-      <li
-        v-for="(error, index) in errors"
-        :key="index"
-      >
-        {{ error }}
-      </li>
-    </ul>
     <div class="calculator-wrap" ref="calculatorWrap">
+      <ul class="calculator-errors">
+        <li
+          v-for="(error, index) in errors"
+          :key="index"
+        >
+          {{ error }}
+        </li>
+      </ul>
       <div class="calculator">
         <Display
           :current="current"
