@@ -86,6 +86,7 @@ export default class Buttons extends Vue {
   @Prop() private numbers!: [];
   @Prop() private operators!: [];
   @Prop() private actions!: [];
+  @Prop() private isSide!: boolean;
 
   addActiveClass (operator: string) {
     if (operator === this.operator) return 'is-active'
@@ -108,13 +109,17 @@ export default class Buttons extends Vue {
   }
 
   showHistory () {
+    if (this.isSide) {
+      this.$emit('showHistory')
+      return
+    }
     const btns = this.$refs.btns as HTMLInputElement
-    btns.classList.add('show-history')
+    btns.classList.add('is-shown')
   }
 
   hideHistory () {
     const btns = this.$refs.btns as HTMLInputElement
-    btns.classList.remove('show-history')
+    btns.classList.remove('is-shown')
   }
 }
 </script>
@@ -129,7 +134,7 @@ export default class Buttons extends Vue {
       flex-wrap: wrap;
       transition: .5s;
       height: $buttonAreaHeight;
-      &.show-history {
+      &.is-shown {
         transform: translate(0, $buttonAreaHeight * -1)
       }
     }

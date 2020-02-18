@@ -42,15 +42,15 @@ export default class History extends Vue {
     border-right: 1px solid map-get($backgroundColors, base);
     background: #fff;
     transition: .5s;
-    &.is-hidden {
+    &.is-side {
       width: $buttonSize * 2;
       flex-basis: $buttonSize * 2;
       border-bottom: 1px solid map-get($backgroundColors, base);
       position: absolute;
       top: 0;
-      left: 0;
+      right: 0;
       &.is-shown {
-        transform: translate($buttonSize * 4, 0)
+        transform: translate($buttonSize * 2, 0)
       }
     }
     &-close {
@@ -71,7 +71,7 @@ export default class History extends Vue {
     &-list {
       height: $buttonAreaHeight;
       overflow-y: scroll;
-      .is-hidden & {
+      .is-side & {
         height: $buttonAreaHeight + 90;
       }
     }

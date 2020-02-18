@@ -1,14 +1,14 @@
 <template>
   <div>
     <Title title="T-Calcurator" />
-    <p class="toggleHistory">
+    <p class="toggleIsSide">
       <input
         type="checkbox"
-        id="toggleHistory"
-        ref="toggleHistory"
-        @change="toggleHistory"
+        id="toggleIsSide"
+        ref="toggleIsSide"
+        @change="toggleIsSide"
       >
-      <label for="toggleHistory">計算履歴を常に表示する</label>
+      <label for="toggleIsSide">計算履歴を常に表示する</label>
     </p>
     <Errors :errors="errors" />
     <div class="calculator-wrap" ref="calculatorWrap">
@@ -22,14 +22,16 @@
           :numbers="numbers"
           :operators="operators"
           :actions="actions"
+          :isSide="isSide"
           @pushNumber="updateDisplay"
           @delete="deleteLastNumber"
           @pushAction="pushActionButton"
           @pushOperation="pushOperationButton"
+          @showHistory="showHistory"
         />
       </div>
       <History
-        :className="['is-hidden', checked ? 'is-shown' : '']"
+        :className="['is-side', isShowHistory && this.isSide ? 'is-shown' : '']"
       />
     </div>
   </div>
@@ -63,7 +65,8 @@ export default class Calculator extends Vue {
   operators = CalculatorStore.OPERATORS
   actions = CalculatorStore.ACTIONS
 
-  checked = false
+  isSide = false
+  isShowHistory = false
 
   update () {
     this.current = this.store.getCurrent()
@@ -91,11 +94,15 @@ export default class Calculator extends Vue {
     this.update()
   }
 
-  toggleHistory () {
-    const toggleHistory = this.$refs.toggleHistory as HTMLInputElement
+  showHistory () {
+    this.isShowHistory = !this.isShowHistory
+  }
+
+  toggleIsSide () {
+    const toggleIsSide = this.$refs.toggleIsSide as HTMLInputElement
     const calculatorWrap = this.$refs.calculatorWrap as HTMLInputElement
-    calculatorWrap.classList.toggle('is-history')
-    this.checked = toggleHistory.checked
+    calculatorWrap.classList.toggle('is-side')
+    this.isSide = toggleIsSide.checked
   }
 }
 </script>
@@ -118,7 +125,7 @@ export default class Calculator extends Vue {
       font-size: map-get($fontSize, title);
     }
   }
-  .toggleHistory {
+  .toggleIsSide {
     font-size: map-get($fontSize, history);
     label {
       cursor: pointer;
