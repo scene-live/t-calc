@@ -23,6 +23,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 @Component
 export default class Display extends Vue {
   @Prop() private current!: string;
+  @Prop() private isSide!: boolean;
 
   mounted () {
     this.setFocus()
@@ -42,6 +43,10 @@ export default class Display extends Vue {
     this.$emit('updateDisplay', this.getInput().value, true)
     this.$forceUpdate()
     this.setFocus()
+  }
+
+  toggleIsSide () {
+    this.$emit('toggleIsSide')
   }
 }
 </script>
@@ -90,6 +95,12 @@ export default class Display extends Vue {
       &.is-longer {
         font-size: map-get($fontSize, displayLonger);
       }
+    }
+  }
+  .icon-toggle {
+    transform: rotate(-90deg);
+    &.is-side {
+      transform: rotate(0);
     }
   }
 </style>

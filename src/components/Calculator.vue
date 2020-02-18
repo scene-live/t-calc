@@ -1,15 +1,6 @@
 <template>
   <div>
     <Title title="T-Calcurator" />
-    <p class="toggleIsSide">
-      <input
-        type="checkbox"
-        id="toggleIsSide"
-        ref="toggleIsSide"
-        @change="toggleIsSide"
-      >
-      <label for="toggleIsSide">計算履歴を常に表示する</label>
-    </p>
     <Errors :errors="errors" />
     <div class="calculator-wrap" ref="calculatorWrap">
       <div class="calculator">
@@ -28,6 +19,7 @@
           @pushAction="pushActionButton"
           @pushOperation="pushOperationButton"
           @showHistory="showHistory"
+          @toggleIsSide="toggleIsSide"
         />
       </div>
       <History
@@ -99,10 +91,7 @@ export default class Calculator extends Vue {
   }
 
   toggleIsSide () {
-    const toggleIsSide = this.$refs.toggleIsSide as HTMLInputElement
-    const calculatorWrap = this.$refs.calculatorWrap as HTMLInputElement
-    calculatorWrap.classList.toggle('is-side')
-    this.isSide = toggleIsSide.checked
+    this.isSide = !this.isSide
   }
 }
 </script>

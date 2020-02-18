@@ -2,6 +2,17 @@
   <div class="btns-wrap" ref="btns">
     <div class="btns-left">
       <ul class="btns actions">
+        <li
+          v-for="(action, index) in actions"
+          :key="index"
+          class="btns-item"
+        >
+          <Button
+            :text="action"
+            :className="['btn-actions', action === 'AC' ? 'is-clear' : '']"
+            @pushButton="pushActionButton"
+          />
+        </li>
         <li class="btns-item">
           <button
             class="btn btn-actions"
@@ -18,36 +29,39 @@
           </button>
         </li>
         <li class="btns-item">
-          <button
-            class="btn btn-actions"
-            @click="deleteLastNumber"
+          <input
+            type="checkbox"
+            class="btn-toggle"
+            id="toggle"
+            @change="toggleIsSide"
           >
-            <svg clip-rule="evenodd" fill-rule="evenodd" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="m7 5h17v16h-17l-7-7.972zm7 6.586-2.586-2.586-1.414 1.414 2.586 2.586-2.586 2.586 1.414 1.414 2.586-2.586 2.586 2.586 1.414-1.414-2.586-2.586 2.586-2.586-1.414-1.414z"/></svg>
-          </button>
-        </li>
-        <li
-          v-for="(action, index) in actions"
-          :key="index"
-          class="btns-item"
-        >
-          <Button
-            :text="action"
-            :className="['btn-actions', action === 'AC' ? 'is-clear' : '']"
-            @pushButton="pushActionButton"
-          />
+          <label
+            for="toggle"
+            class="btn btn-actions"
+          >
+            <svg :class="['icon-toggle', isSide ? 'is-side' : '']" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M17.554 12l-6 6h-3.979l3.093-3h-10.668v-6h10.668l-3.093-3h3.979l6 6zm.446-6h-3.979l6 6-6 6h3.979l6-6-6-6z"/></svg>
+          </label>
         </li>
       </ul>
       <ul class="btns numbers">
         <li
           v-for="(number, index) in numbers"
           :key="index"
-          :class="['btns-item', number === 0 ? 'is-zero' : '']"
+          :class="['btns-item']"
         >
           <Button
             :text="number"
             className="btn-numbers"
             @pushButton="updateDisplay"
           />
+        </li>
+        <li class="btns-item">
+          <button
+            class="btn btn-numbers"
+            @click="deleteLastNumber"
+          >
+            <svg clip-rule="evenodd" fill-rule="evenodd" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="m7 5h17v16h-17l-7-7.972zm7 6.586-2.586-2.586-1.414 1.414 2.586 2.586-2.586 2.586 1.414 1.414 2.586-2.586 2.586 2.586 1.414-1.414-2.586-2.586 2.586-2.586-1.414-1.414z"/></svg>
+          </button>
         </li>
       </ul>
     </div>
@@ -121,6 +135,10 @@ export default class Buttons extends Vue {
     const btns = this.$refs.btns as HTMLInputElement
     btns.classList.remove('is-shown')
   }
+
+  toggleIsSide () {
+    this.$emit('toggleIsSide')
+  }
 }
 </script>
 
@@ -162,5 +180,14 @@ export default class Buttons extends Vue {
 
   .btn {
     @include button;
+    &-toggle {
+      display: none;
+    }
+  }
+  .icon-toggle {
+    transform: rotate(-90deg);
+    &.is-side {
+      transform: rotate(0);
+    }
   }
 </style>
