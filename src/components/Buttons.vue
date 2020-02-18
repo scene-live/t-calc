@@ -109,7 +109,7 @@ export default class Buttons extends Vue {
     flex-wrap: wrap;
     &-item {
       width: $buttonSize;
-      height: $buttonSize;
+      height: $buttonSize * .8;
       line-height: $buttonSize;
       border-top: 1px solid map-get($backgroundColors, base);
       border-left: 1px solid map-get($backgroundColors, base);
