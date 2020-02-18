@@ -41,10 +41,17 @@ export default class History extends Vue {
     border-left: 1px solid map-get($backgroundColors, base);
     border-right: 1px solid map-get($backgroundColors, base);
     background: #fff;
-    &.is-show {
-      width: 450px;
-      flex-basis: 450px;
+    transition: .5s;
+    &.is-hidden {
+      width: $buttonSize * 2;
+      flex-basis: $buttonSize * 2;
       border-bottom: 1px solid map-get($backgroundColors, base);
+      position: absolute;
+      top: 0;
+      left: 0;
+      &.is-shown {
+        transform: translate($buttonSize * 4, 0)
+      }
     }
     &-close {
       background: map-get($backgroundColors, base);
@@ -64,7 +71,7 @@ export default class History extends Vue {
     &-list {
       height: $buttonAreaHeight;
       overflow-y: scroll;
-      .is-show & {
+      .is-hidden & {
         height: $buttonAreaHeight + 90;
       }
     }
@@ -73,8 +80,8 @@ export default class History extends Vue {
       color: #fff;
       background: map-get($backgroundColors, base);
       text-align: right;
-      font-size: map-get($fontSize, btn);
-      padding: 15px 10px;
+      font-size: map-get($fontSize, history);
+      padding: 10px 5px;
       border-bottom: 1px solid #3c434c;
       transition: .3s;
       @media #{$not_sp} {

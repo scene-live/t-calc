@@ -10,8 +10,8 @@
       >
       <label for="toggleHistory">計算履歴を常に表示する</label>
     </p>
+    <Errors :errors="errors" />
     <div class="calculator-wrap" ref="calculatorWrap">
-      <Errors :errors="errors" />
       <div class="calculator">
         <Display
           :current="current"
@@ -29,8 +29,7 @@
         />
       </div>
       <History
-        v-if="checked"
-        className="is-show"
+        :className="['is-hidden', checked ? 'is-shown' : '']"
       />
     </div>
   </div>
@@ -106,17 +105,14 @@ export default class Calculator extends Vue {
   .calculator {
     width: $buttonSize * 4 + 1;
     overflow: hidden;
+    position: relative;
+    z-index: 10;
     background: map-get($backgroundColors, base);
     border-bottom: 1px solid map-get($backgroundColors, base);
     &-wrap {
       width: $buttonSize * 4 + 1;
       margin: 0 auto;
-      &.is-history {
-        width: 800px;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-      }
+      position: relative;
     }
     &-title {
       font-size: map-get($fontSize, title);
