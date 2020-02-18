@@ -1,6 +1,6 @@
 <template>
-  <div class="history">
-    <p class="history-close" @click="hideHistory">
+  <div :class="['history', className ? className : '']">
+    <p :class="['history-close', className ? 'is-hidden' : '']" @click="hideHistory">
       <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="24" height="24" viewBox="0 0 24 24"><path d="M0 7.33l2.829-2.83 9.175 9.339 9.167-9.339 2.829 2.83-11.996 12.17z"/></svg>
     </p>
     <ul class="history-list">
@@ -28,6 +28,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 
 @Component
 export default class History extends Vue {
+  @Prop() private className!: string
   hideHistory () {
     this.$emit('hideHistory')
   }
@@ -40,6 +41,11 @@ export default class History extends Vue {
     border-left: 1px solid map-get($backgroundColors, base);
     border-right: 1px solid map-get($backgroundColors, base);
     background: #fff;
+    &.is-show {
+      width: 450px;
+      flex-basis: 450px;
+      border-bottom: 1px solid map-get($backgroundColors, base);
+    }
     &-close {
       background: map-get($backgroundColors, base);
       cursor: pointer;
@@ -51,10 +57,16 @@ export default class History extends Vue {
           opacity: .8;
         }
       }
+      &.is-hidden {
+        display: none;
+      }
     }
     &-list {
       height: $buttonAreaHeight;
       overflow-y: scroll;
+      .is-show & {
+        height: $buttonAreaHeight + 90;
+      }
     }
     &-item {
       cursor: pointer;
