@@ -3,7 +3,8 @@ export default class CalculatorStore {
   private temp: number;
   private operator: string;
   private shouldClearDisplay: boolean;
-  private errors: string[]
+  private errors: string[];
+  private histories: object[];
 
   constructor () {
     this.current = '0'
@@ -11,6 +12,7 @@ export default class CalculatorStore {
     this.operator = ''
     this.shouldClearDisplay = false
     this.errors = []
+    this.histories = []
   }
 
   getCurrent () {
@@ -23,6 +25,10 @@ export default class CalculatorStore {
 
   getErrors () {
     return this.errors
+  }
+
+  getHistories () {
+    return this.histories
   }
 
   // advice: NUMBERS ではなく NUMERIC＿KEYPAD など
@@ -133,10 +139,14 @@ export default class CalculatorStore {
   }
 
   calculate () {
+    const rhs = this.current
+
     if (this.operator === '+') this.add()
     if (this.operator === '-') this.minus()
     if (this.operator === '×') this.multiply()
     if (this.operator === '÷') this.divide()
+
+    this.addHistory(rhs)
 
     this.temp = 0
     this.operator = ''
@@ -157,5 +167,16 @@ export default class CalculatorStore {
 
   divide () {
     this.current = String(this.temp / Number(this.current))
+  }
+
+  addHistory (rhs: string) {
+    const history = {
+      lfs: this.temp,
+      operator: this.operator,
+      rhs,
+      result: this.current
+    }
+
+    this.histories.unshift(history)
   }
 }

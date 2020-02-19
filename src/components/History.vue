@@ -5,21 +5,14 @@
       <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="24" height="24" viewBox="0 0 24 24"><path d="M0 7.33l2.829-2.83 9.175 9.339 9.167-9.339 2.829 2.83-11.996 12.17z"/></svg> -->
     </p>
     <ul class="history-list">
-      <li class="history-item">123 + 23 = 146</li>
-      <li class="history-item">123 + 23 = 146</li>
-      <li class="history-item">123 + 23 = 146</li>
-      <li class="history-item">123 + 23 = 146</li>
-      <li class="history-item">123 + 23 = 146</li>
-      <li class="history-item">123 + 23 = 146</li>
-      <li class="history-item">123 + 23 = 146</li>
-      <li class="history-item">123 + 23 = 146</li>
-      <li class="history-item">123 + 23 = 146</li>
-      <li class="history-item">123 + 23 = 146</li>
-      <li class="history-item">123 + 23 = 146</li>
-      <li class="history-item">123 + 23 = 146</li>
-      <li class="history-item">123 + 23 = 146</li>
-      <li class="history-item">123 + 23 = 146</li>
-      <li class="history-item">123 + 23 = 146</li>
+      <li
+        v-for="(history, index) in histories"
+        :key="index"
+        class="history-item"
+      >
+        {{history.lfs}} {{history.operator}} {{history.rhs}} = {{history.result}}
+      </li>
+      <li v-if="histories.length === 0" class="history-item is-empty">履歴はありません</li>
     </ul>
   </div>
 </template>
@@ -30,6 +23,8 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 @Component
 export default class History extends Vue {
   @Prop() private className!: string
+  @Prop() private histories!: []
+
   hideHistory () {
     this.$emit('hideHistory')
   }
@@ -41,7 +36,7 @@ export default class History extends Vue {
     flex-basis: 100%;
     border-left: 1px solid map-get($backgroundColors, base);
     border-right: 1px solid map-get($backgroundColors, base);
-    background: #fff;
+    background: map-get($backgroundColors, base);
     transition: .5s;
     &.is-side {
       width: $buttonSize * 2;
@@ -86,11 +81,29 @@ export default class History extends Vue {
       font-size: map-get($fontSize, history);
       padding: 10px 5px;
       border-bottom: 1px solid #3c434c;
-      transition: .3s;
+      position: relative;
+      &::before {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: rgba(255, 255, 255, .2);
+        opacity: 0;
+      }
       @media #{$not_sp} {
         &:hover {
           opacity: .8;
+          &::before {
+            opacity: 1;
+          }
         }
+      }
+      &.is-empty {
+        text-align: center;
+        border-bottom: none;
       }
     }
   }

@@ -85,6 +85,7 @@
       </li>
     </ul>
     <History
+      :histories="histories"
       @hideHistory="hideHistory"
     />
   </div>
@@ -106,6 +107,7 @@ export default class Buttons extends Vue {
   @Prop() private numbers!: [];
   @Prop() private operators!: [];
   @Prop() private actions!: [];
+  @Prop() private histories!: [];
   @Prop() private isSide!: boolean;
 
   addActiveClass (operator: string) {

@@ -13,6 +13,7 @@
           :numbers="numbers"
           :operators="operators"
           :actions="actions"
+          :histories="histories"
           :isSide="isSide"
           @pushNumber="updateDisplay"
           @delete="deleteLastNumber"
@@ -24,6 +25,7 @@
       </div>
       <History
         :className="['is-side', isShowHistory && isSide ? 'is-shown' : '']"
+        :histories="histories"
       />
     </div>
   </div>
@@ -53,6 +55,7 @@ export default class Calculator extends Vue {
   current = this.store.getCurrent()
   operator = this.store.getOperator()
   errors = this.store.getErrors()
+  histories = this.store.getHistories()
   numbers = CalculatorStore.NUMBERS
   operators = CalculatorStore.OPERATORS
   actions = CalculatorStore.ACTIONS
