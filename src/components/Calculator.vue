@@ -23,7 +23,7 @@
         />
       </div>
       <History
-        :className="['is-side', isShowHistory && this.isSide ? 'is-shown' : '']"
+        :className="['is-side', isShowHistory && isSide ? 'is-shown' : '']"
       />
     </div>
   </div>

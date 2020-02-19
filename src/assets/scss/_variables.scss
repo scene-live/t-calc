@@ -86,4 +86,4 @@ $fontSize: (
 
 $buttonSize: 70px;
 $buttonHeight: $buttonSize * .8;
-$buttonAreaHeight: $buttonHeight * 6;
+$buttonAreaHeight: $buttonHeight * 5 + $buttonSize * .6;
