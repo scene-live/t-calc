@@ -1,7 +1,7 @@
 interface History {
-  lfs: number;
+  lfs: number|null;
   operator: string;
-  rhs: number;
+  rhs: number|null;
   result: string;
 }
 
@@ -12,6 +12,8 @@ export default class CalculatorStore {
   private shouldClearDisplay: boolean;
   private errors: string[];
   private histories: History[];
+  private history: History;
+  private isCalcurating: boolean;
 
   constructor () {
     this.current = '0'
@@ -20,6 +22,13 @@ export default class CalculatorStore {
     this.shouldClearDisplay = false
     this.errors = []
     this.histories = []
+    this.history = {
+      lfs: null,
+      operator: '',
+      rhs: null,
+      result: ''
+    }
+    this.isCalcurating = false
   }
 
   getCurrent () {
@@ -44,12 +53,19 @@ export default class CalculatorStore {
   static ACTIONS = ['AC', '+/-', '%']
 
   updateDisplay (value: string, isInput = false) {
+    this.isCalcurating = true
+    this.history.result = ''
+
     if (isInput) {
       this.inputNumber(value)
+      this.createHistory()
+      this.isCalcurating = false
       return
     }
 
     this.pushNumberButton(value)
+    this.createHistory()
+    this.isCalcurating = false
   }
 
   pushNumberButton (value: string) {
@@ -144,6 +160,7 @@ export default class CalculatorStore {
 
     this.temp = Number(this.current)
     this.operator = operator
+    this.createHistory()
   }
 
   calculate () {
@@ -156,6 +173,7 @@ export default class CalculatorStore {
 
     this.addHistory(rhs)
 
+    this.history.result = this.current
     this.temp = 0
     this.operator = ''
     this.shouldClearDisplay = true
@@ -190,6 +208,24 @@ export default class CalculatorStore {
 
   backSelectedHistory (index: number) {
     this.current = this.histories[index].result
+    this.history = { ...this.histories[index] }
     this.histories = this.histories.filter(h => this.histories.indexOf(h) >= index)
+  }
+
+  createHistory () {
+    this.history.lfs = this.temp ? this.temp : Number(this.current)
+    this.history.operator = this.operator
+    this.history.rhs = (this.operator && this.isCalcurating) ? Number(this.current) : null
+  }
+
+  getCalculating () {
+    return `${this.history.lfs ? this.history.lfs : ''}
+      ${this.history.operator}
+      ${this.history.rhs ? this.history.rhs : ''}
+      ${this.history.result && this.history.rhs ? '=' : ''}`
+  }
+
+  back () {
+    console.log('a')
   }
 }

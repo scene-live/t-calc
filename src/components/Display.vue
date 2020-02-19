@@ -1,7 +1,7 @@
 <template>
   <div class="display">
-    <p v-if="history" class="display-formula">
-      {{history.lfs}} {{history.operator}} {{history.rhs}} =
+    <p class="display-formula">
+      {{ calculating }}
     </p>
     <input
       type="text"
@@ -27,6 +27,7 @@ export default class Display extends Vue {
   @Prop() private current!: string;
   @Prop() private history!: {};
   @Prop() private isSide!: boolean;
+  @Prop() private calculating!: string;
 
   mounted () {
     this.setFocus()

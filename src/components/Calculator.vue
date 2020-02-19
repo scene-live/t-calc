@@ -7,6 +7,7 @@
         <Display
           :current="current"
           :history="histories[0]"
+          :calculating="calculating"
           @updateDisplay="updateDisplay"
         />
         <Buttons
@@ -59,6 +60,7 @@ export default class Calculator extends Vue {
   operator = this.store.getOperator()
   errors = this.store.getErrors()
   histories = this.store.getHistories()
+  calculating = this.store.getCalculating()
   numbers = CalculatorStore.NUMBERS
   operators = CalculatorStore.OPERATORS
   actions = CalculatorStore.ACTIONS
@@ -71,6 +73,7 @@ export default class Calculator extends Vue {
     this.operator = this.store.getOperator()
     this.errors = this.store.getErrors()
     this.histories = this.store.getHistories()
+    this.calculating = this.store.getCalculating()
   }
 
   updateDisplay (value: string, isInput: boolean) {
