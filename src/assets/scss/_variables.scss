@@ -39,6 +39,9 @@ html {
     color: map-get($actionButtonColor, color);
     background: map-get($actionButtonColor, background);
   }
+  &-operators {
+    font-size: map-get($fontSize, btnOperators);
+  }
   &.is-clear {
     color: #fff;
     background: $attentionColor;
@@ -80,6 +83,7 @@ $fontSize: (
   displayLong: 3rem,
   displayLonger: 2.5rem,
   btn: 1.8rem,
+  btnOperators: 2.2rem,
   history: 1.2rem,
   errors: 1.4rem,
 );
