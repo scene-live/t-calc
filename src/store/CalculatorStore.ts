@@ -240,11 +240,10 @@ export default class CalculatorStore {
   }
 
   back () {
-    console.log(this.lastHistory)
     this.history = { ...this.lastHistory }
-    this.current = this.lastHistory.result ? this.lastHistory.result : this.lastHistory.rhs ? String(this.lastHistory.rhs) : String(this.lastHistory.lfs)
-    this.operator = this.lastHistory.result ? '' : this.lastHistory.operator
-    this.temp = Number(this.lastHistory.lfs)
-    this.shouldClearDisplay = true
+    this.current = this.history.result ? this.history.result : this.history.rhs ? String(this.history.rhs) : String(this.history.lfs)
+    this.operator = this.history.result ? '' : this.history.operator
+    this.temp = (this.history.operator && !this.history.result) ? Number(this.history.lfs) : 0
+    if ((this.history.operator && !this.history.rhs) || this.history.result) this.shouldClearDisplay = true
   }
 }
