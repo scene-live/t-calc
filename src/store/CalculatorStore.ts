@@ -227,16 +227,16 @@ export default class CalculatorStore {
   }
 
   createHistory () {
-    this.history.lfs = this.temp ? this.temp : Number(this.current)
+    this.history.lfs = this.operator ? this.temp : Number(this.current)
     this.history.operator = this.operator
     this.history.rhs = (this.operator && this.isCalcurating) ? Number(this.current) : null
   }
 
   getCalculating () {
-    return `${this.history.lfs ? this.history.lfs : ''}
+    return `${this.history.lfs !== null ? this.history.lfs : ''}
       ${this.history.operator}
-      ${this.history.rhs ? this.history.rhs : ''}
-      ${this.history.result && this.history.rhs ? '=' : ''}`
+      ${this.history.rhs !== null ? this.history.rhs : ''}
+      ${this.history.result !== '' && this.history.rhs !== null ? '=' : ''}`
   }
 
   back () {
@@ -244,6 +244,14 @@ export default class CalculatorStore {
     this.current = this.history.result ? this.history.result : this.history.rhs ? String(this.history.rhs) : String(this.history.lfs)
     this.operator = this.history.result ? '' : this.history.operator
     this.temp = (this.history.operator && !this.history.result) ? Number(this.history.lfs) : 0
+
     if ((this.history.operator && !this.history.rhs) || this.history.result) this.shouldClearDisplay = true
+
+    this.lastHistory = {
+      lfs: null,
+      operator: '',
+      rhs: null,
+      result: ''
+    }
   }
 }
