@@ -116,6 +116,7 @@ export default class CalculatorStore {
     this.temp = 0
     this.operator = ''
     this.errors = []
+    this.histories = []
     this.shouldClearDisplay = false
   }
 
