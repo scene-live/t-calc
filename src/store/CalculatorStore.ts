@@ -60,7 +60,7 @@ export default class CalculatorStore {
 
     this.errors = []
 
-    if (this.operator && this.shouldClearDisplay) {
+    if (this.shouldClearDisplay) {
       this.current = '0'
       this.shouldClearDisplay = false
     }
@@ -88,7 +88,7 @@ export default class CalculatorStore {
       return
     }
 
-    if (this.operator && this.shouldClearDisplay) {
+    if (this.shouldClearDisplay) {
       this.current = value.slice(this.current.length)
       this.shouldClearDisplay = false
       return
@@ -136,6 +136,7 @@ export default class CalculatorStore {
   }
 
   pushOperationButton (operator: string) {
+    this.shouldClearDisplay = true
     if (operator === '=' && this.operator) {
       this.calculate()
       return
@@ -143,7 +144,6 @@ export default class CalculatorStore {
 
     this.temp = Number(this.current)
     this.operator = operator
-    this.shouldClearDisplay = true
   }
 
   calculate () {
