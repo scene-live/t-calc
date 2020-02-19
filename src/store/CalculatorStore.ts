@@ -13,6 +13,7 @@ export default class CalculatorStore {
   private errors: string[];
   private histories: History[];
   private history: History;
+  private lastHistory: History;
   private isCalcurating: boolean;
 
   constructor () {
@@ -23,6 +24,12 @@ export default class CalculatorStore {
     this.errors = []
     this.histories = []
     this.history = {
+      lfs: null,
+      operator: '',
+      rhs: null,
+      result: ''
+    }
+    this.lastHistory = {
       lfs: null,
       operator: '',
       rhs: null,
@@ -135,12 +142,19 @@ export default class CalculatorStore {
   }
 
   clearAll () {
+    this.lastHistory = { ...this.history }
     this.current = '0'
     this.temp = 0
     this.operator = ''
     this.errors = []
     this.histories = []
     this.shouldClearDisplay = false
+    this.history = {
+      lfs: null,
+      operator: '',
+      rhs: null,
+      result: ''
+    }
   }
 
   switchNegativeNumber () {
@@ -226,6 +240,11 @@ export default class CalculatorStore {
   }
 
   back () {
-    console.log('a')
+    console.log(this.lastHistory)
+    this.history = { ...this.lastHistory }
+    this.current = this.lastHistory.result ? this.lastHistory.result : this.lastHistory.rhs ? String(this.lastHistory.rhs) : String(this.lastHistory.lfs)
+    this.operator = this.lastHistory.result ? '' : this.lastHistory.operator
+    this.temp = Number(this.lastHistory.lfs)
+    this.shouldClearDisplay = true
   }
 }

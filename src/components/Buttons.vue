@@ -4,6 +4,7 @@
       <li class="btns-item is-small">
         <button
           class="btn btn-small"
+          @click="back"
         >
           <font-awesome-icon icon="reply" />
         </button>
@@ -147,6 +148,10 @@ export default class Buttons extends Vue {
 
   backSelectedHistory (index: number) {
     this.$emit('backSelectedHistory', index)
+  }
+
+  back () {
+    this.$emit('back')
   }
 }
 </script>

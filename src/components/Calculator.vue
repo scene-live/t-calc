@@ -24,6 +24,7 @@
           @showHistory="showHistory"
           @toggleIsSide="toggleIsSide"
           @backSelectedHistory="backSelectedHistory"
+          @back="back"
         />
       </div>
       <History
@@ -98,6 +99,11 @@ export default class Calculator extends Vue {
 
   backSelectedHistory (index: number) {
     this.store.backSelectedHistory(index)
+    this.update()
+  }
+
+  back () {
+    this.store.back()
     this.update()
   }
 
