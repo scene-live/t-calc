@@ -57,9 +57,24 @@ export default class History extends Vue {
       padding: 10px 0;
       margin: 0;
       transition: .3s;
+      position: relative;
+      &::before {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: rgba(255, 255, 255, .2);
+        opacity: 0;
+      }
       @media #{$not_sp} {
         &:hover {
           opacity: .8;
+          &::before {
+            opacity: 1;
+          }
         }
       }
       &.is-hidden {
@@ -104,6 +119,15 @@ export default class History extends Vue {
       &.is-empty {
         text-align: center;
         border-bottom: none;
+        cursor: auto;
+        @media #{$not_sp} {
+          &:hover {
+            opacity: 1;
+          }
+        }
+        &::before {
+          display: none;
+        }
       }
     }
   }
