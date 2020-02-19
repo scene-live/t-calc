@@ -1,10 +1,17 @@
+interface History {
+  lfs: number;
+  operator: string;
+  rhs: number;
+  result: string;
+}
+
 export default class CalculatorStore {
   private current: string;
   private temp: number;
   private operator: string;
   private shouldClearDisplay: boolean;
   private errors: string[];
-  private histories: object[];
+  private histories: History[];
 
   constructor () {
     this.current = '0'
@@ -140,7 +147,7 @@ export default class CalculatorStore {
   }
 
   calculate () {
-    const rhs = this.current
+    const rhs = Number(this.current)
 
     if (this.operator === '+') this.add()
     if (this.operator === '-') this.minus()
@@ -170,7 +177,7 @@ export default class CalculatorStore {
     this.current = String(this.temp / Number(this.current))
   }
 
-  addHistory (rhs: string) {
+  addHistory (rhs: number) {
     const history = {
       lfs: this.temp,
       operator: this.operator,
@@ -179,5 +186,10 @@ export default class CalculatorStore {
     }
 
     this.histories.unshift(history)
+  }
+
+  backSelectedHistory (index: number) {
+    this.current = this.histories[index].result
+    this.histories = this.histories.filter(h => this.histories.indexOf(h) >= index)
   }
 }

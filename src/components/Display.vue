@@ -1,6 +1,8 @@
 <template>
   <div class="display">
-    <p class="display-formula">123 + 23</p>
+    <p v-if="history" class="display-formula">
+      {{history.lfs}} {{history.operator}} {{history.rhs}} =
+    </p>
     <input
       type="text"
       :class="[
@@ -23,6 +25,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 @Component
 export default class Display extends Vue {
   @Prop() private current!: string;
+  @Prop() private history!: {};
   @Prop() private isSide!: boolean;
 
   mounted () {

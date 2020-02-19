@@ -6,6 +6,7 @@
       <div class="calculator">
         <Display
           :current="current"
+          :history="histories[0]"
           @updateDisplay="updateDisplay"
         />
         <Buttons
@@ -21,11 +22,13 @@
           @pushOperation="pushOperationButton"
           @showHistory="showHistory"
           @toggleIsSide="toggleIsSide"
+          @backSelectedHistory="backSelectedHistory"
         />
       </div>
       <History
         :className="['is-side', isShowHistory && isSide ? 'is-shown' : '']"
         :histories="histories"
+        @backSelectedHistory="backSelectedHistory"
       />
     </div>
   </div>
@@ -87,6 +90,11 @@ export default class Calculator extends Vue {
 
   pushOperationButton (operator: string) {
     this.store.pushOperationButton(operator)
+    this.update()
+  }
+
+  backSelectedHistory (index: number) {
+    this.store.backSelectedHistory(index)
     this.update()
   }
 

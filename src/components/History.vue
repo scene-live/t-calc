@@ -8,6 +8,7 @@
         v-for="(history, index) in histories"
         :key="index"
         class="history-item"
+        @click="backSelectedHistory(index)"
       >
         {{history.lfs}} {{history.operator}} {{history.rhs}} = {{history.result}}
       </li>
@@ -26,6 +27,10 @@ export default class History extends Vue {
 
   hideHistory () {
     this.$emit('hideHistory')
+  }
+
+  backSelectedHistory (index: number) {
+    this.$emit('backSelectedHistory', index)
   }
 }
 </script>

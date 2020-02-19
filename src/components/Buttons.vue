@@ -83,6 +83,7 @@
     <History
       :histories="histories"
       @hideHistory="hideHistory"
+      @backSelectedHistory="backSelectedHistory"
     />
   </div>
 </template>
@@ -142,6 +143,10 @@ export default class Buttons extends Vue {
 
   toggleIsSide () {
     this.$emit('toggleIsSide')
+  }
+
+  backSelectedHistory (index: number) {
+    this.$emit('backSelectedHistory', index)
   }
 }
 </script>
