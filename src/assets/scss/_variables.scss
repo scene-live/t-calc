@@ -39,6 +39,12 @@ html {
     color: map-get($actionButtonColor, color);
     background: map-get($actionButtonColor, background);
   }
+  &-small {
+    color: map-get($actionButtonColor, color);
+    background: rgba(232, 190, 28, .6);
+    background: rgba(89, 162, 72, .6);
+    background: rgba(103, 158, 90, .6);
+  }
   &-operators {
     font-size: map-get($fontSize, btnOperators);
   }
