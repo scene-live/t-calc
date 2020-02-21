@@ -162,12 +162,12 @@ export default class Calculator extends Vue {
 
   showSetting () {
     const setting = this.$refs.setting as HTMLElement
-    setting.classList.add('is-active')
+    setting.classList.add('is-shown')
   }
 
   closeSetting () {
     const setting = this.$refs.setting as HTMLElement
-    setting.classList.remove('is-active')
+    setting.classList.remove('is-shown')
   }
 }
 </script>
@@ -184,7 +184,7 @@ export default class Calculator extends Vue {
     left: -100%;
     z-index: 102;
     transition: .5s;
-    &.is-active {
+    &.is-shown {
       transform: translate(100%, 0)
     }
     &-close {
@@ -198,17 +198,34 @@ export default class Calculator extends Vue {
     }
     &-content {
       text-align: left;
+      margin-bottom: 10px;
     }
     &-title {
-      font-size: 1.4em;
+      font-size: 1.6em;
       margin-bottom: 5px;
-      border-bottom: 1px solid #fff;
-      padding: 0 10px;
+      position: relative;
+      padding: 0 10px 0;
+      display: inline-block;
+      color: map-get($defaultButtonColor, color);
+      background: map-get($backgroundColors, base);
+      &::before, &:after {
+        content: '';
+        display: block;
+        height: 1px;
+        background: map-get($defaultButtonColor, color);;
+        position: absolute;
+        bottom: 50%;
+        left: 0;
+      }
+      &::before {
+        z-index: -1;
+        width: $buttonSize * 4 + 1;
+      }
     }
     &-item {
-      font-size: 1.2em;
+      font-size: 1.4em;
       padding: .5em 10px;
-      margin: 0 0 1em 0;
+      margin: 0;
       position: relative;
       &.has-option {
         cursor: pointer;
@@ -218,17 +235,6 @@ export default class Calculator extends Vue {
               opacity: .2;
             }
           }
-        }
-        &::before {
-          content: '';
-          display: block;
-          width: 100%;
-          height: 100%;
-          background: #fff;
-          position: absolute;
-          top: 0;
-          left: 0;
-          opacity: 0;
         }
         &::after {
           content: '';

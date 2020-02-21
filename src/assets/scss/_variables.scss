@@ -23,18 +23,10 @@ html {
   background: map-get($defaultButtonColor, background);
   font-size: map-get($fontSize, btn);
   cursor: pointer;
-  &:disabled {
-    cursor: not-allowed;
-    color: rgba($subColor, .3);
-    background: map-get($backgroundColors, base);
-    opacity: .6;
-  }
+  &:disabled {}
   @media #{$not_sp} {
     &:hover {
       opacity: .8;
-      &:disabled {
-        opacity: .6;
-      }
     }
   }
   &:focus {
@@ -106,4 +98,4 @@ $fontSize: (
 
 $buttonSize: 70px;
 $buttonHeight: $buttonSize * .8;
-$buttonAreaHeight: $buttonHeight * 5 + $buttonSize * .6;
+$buttonAreaHeight: $buttonHeight * 6;

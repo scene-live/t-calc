@@ -1,35 +1,5 @@
 <template>
   <div class="btns-wrap" ref="btns">
-    <ul class="btns actions">
-      <li class="btns-item is-small">
-        <button class="btn btn-small"></button>
-      </li>
-      <li class="btns-item is-small">
-        <button
-          class="btn btn-small"
-          :disabled="!isAllCLeared"
-          @click="back"
-        >
-          <font-awesome-icon icon="reply" />
-        </button>
-      </li>
-      <li class="btns-item is-small">
-        <button
-          class="btn btn-small"
-          @click="showHistory"
-        >
-          <font-awesome-icon icon="history" />
-        </button>
-      </li>
-      <li class="btns-item is-small">
-        <button
-          class="btn btn-small"
-          @click="deleteLastNumber"
-        >
-          <font-awesome-icon icon="backspace" />
-        </button>
-      </li>
-    </ul>
     <div class="btns-left">
       <ul class="btns actions">
         <li
@@ -57,12 +27,39 @@
           />
         </li>
       </ul>
+      <ul class="btns actions">
+        <li class="btns-item is-small">
+          <button
+            class="btn btn-small"
+            :disabled="!isAllCLeared"
+            @click="back"
+          >
+            <font-awesome-icon icon="reply" />
+          </button>
+        </li>
+        <li class="btns-item is-small">
+          <button
+            class="btn btn-small"
+            @click="showHistory"
+          >
+            <font-awesome-icon icon="history" />
+          </button>
+        </li>
+        <li class="btns-item is-small">
+          <button
+            class="btn btn-small"
+            @click="deleteLastNumber"
+          >
+            <font-awesome-icon icon="backspace" />
+          </button>
+        </li>
+      </ul>
     </div>
     <ul class="btns-right operators">
       <li
         v-for="(operator, index) in operators"
         :key="index"
-        :class="['btns-item']"
+        :class="['btns-item', operator === '=' ? 'is-equal' : '']"
       >
         <Button
           :text="operator"
@@ -172,11 +169,9 @@ export default class Buttons extends Vue {
         width: $buttonSize * 2;
       }
       &.is-equal {
-        height: $buttonSize * 1.6;
+        height: $buttonHeight * 2;
       }
-      &.is-small {
-        height: $buttonSize * .6;
-      }
+      &.is-small {}
     }
     &-left {
       flex-basis: $buttonSize * 3;
