@@ -25,6 +25,7 @@ html {
   cursor: pointer;
   &:disabled {
     cursor: not-allowed;
+    color: rgba(map-get($actionButtonColor, color), .3);
     background: #ccc;
   }
   @media #{$not_sp} {
