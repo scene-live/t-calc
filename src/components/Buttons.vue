@@ -2,6 +2,9 @@
   <div class="btns-wrap" ref="btns">
     <ul class="btns actions">
       <li class="btns-item is-small">
+        <button class="btn btn-small"></button>
+      </li>
+      <li class="btns-item is-small">
         <button
           class="btn btn-small"
           :disabled="!isAllCLeared"
@@ -17,20 +20,6 @@
         >
           <font-awesome-icon icon="history" />
         </button>
-      </li>
-      <li class="btns-item is-small">
-        <input
-          type="checkbox"
-          class="btn-toggle"
-          id="toggle"
-          @change="toggleIsSide"
-        >
-        <label
-          for="toggle"
-          class="btn btn-small"
-        >
-          <font-awesome-icon :class="['icon-toggle', isSide ? 'is-side' : '']" icon="angle-double-up" />
-        </label>
       </li>
       <li class="btns-item is-small">
         <button

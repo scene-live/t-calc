@@ -4,6 +4,48 @@
     <Errors :errors="errors" />
     <div class="calculator-wrap" ref="calculatorWrap">
       <div class="calculator">
+        <div class="setting" ref="setting">
+          <h2>設定</h2>
+          <font-awesome-icon
+            class="setting-close"
+            icon="times"
+            @click="closeSetting"
+          />
+          <div class="setting-content">
+            <h3 class="setting-title">履歴表示</h3>
+            <p class="setting-item">
+              <input
+                type="checkbox"
+                class="setting-check"
+                name="toggleIsSide"
+                id="toggleIsSide"
+                @change="toggleIsSide"
+              >
+              <label for="toggleIsSide" class="setting-label">横に表示する</label>
+            </p>
+          </div>
+          <div class="setting-content">
+            <h3 class="setting-title">フォント</h3>
+            <div class="setting-item has-option">ヒラギノ角ゴシック</div>
+          </div>
+          <div class="setting-content">
+            <h3 class="setting-title">テーマ</h3>
+            <div class="setting-item has-option">ダーク</div>
+          </div>
+        </div>
+        <p class="calculator-setting">
+          <input
+            type="checkbox"
+            class="calculator-setting-toggle"
+            id="toggle"
+            @change="showSetting"
+          >
+          <label
+            for="toggle"
+          >
+            <font-awesome-icon :class="['icon-toggle', isSide ? 'is-side' : '']" icon="cog" />
+          </label>
+        </p>
         <Display
           :current="current"
           :history="histories[0]"
@@ -117,11 +159,131 @@ export default class Calculator extends Vue {
   toggleIsSide () {
     this.isSide = !this.isSide
   }
+
+  showSetting () {
+    const setting = this.$refs.setting as HTMLElement
+    setting.classList.add('is-active')
+  }
+
+  closeSetting () {
+    const setting = this.$refs.setting as HTMLElement
+    setting.classList.remove('is-active')
+  }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+  .setting {
+    color: #fff;
+    background: map-get($backgroundColors, base);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: -100%;
+    z-index: 102;
+    transition: .5s;
+    &.is-active {
+      transform: translate(100%, 0)
+    }
+    &-close {
+      font-size: 1.6rem;
+      position: absolute;
+      width: 1em;
+      height: 1em;
+      cursor: pointer;
+      top: 5px;
+      left: 8px;
+    }
+    &-content {
+      text-align: left;
+    }
+    &-title {
+      font-size: 1.4em;
+      margin-bottom: 5px;
+      border-bottom: 1px solid #fff;
+      padding: 0 10px;
+    }
+    &-item {
+      font-size: 1.2em;
+      padding: .5em 10px;
+      margin: 0 0 1em 0;
+      position: relative;
+      &.has-option {
+        cursor: pointer;
+        @media #{$not_sp} {
+          &:hover {
+            &::before {
+              opacity: .2;
+            }
+          }
+        }
+        &::before {
+          content: '';
+          display: block;
+          width: 100%;
+          height: 100%;
+          background: #fff;
+          position: absolute;
+          top: 0;
+          left: 0;
+          opacity: 0;
+        }
+        &::after {
+          content: '';
+          display: block;
+          width: 8px;
+          height: 8px;
+          border-top: 1px solid #fff;
+          border-right: 1px solid #fff;
+          position: absolute;
+          top: 50%;
+          right: 10px;
+          transform: rotate(45deg) translateX(-50%);
+        }
+      }
+    }
+    &-check {
+      display: none;
+    }
+    &-label {
+      position: relative;
+      display: block;
+      &::before, &::after {
+        content: '';
+        cursor: pointer;
+        display: block;
+        position: absolute;
+        z-index: 105;
+        transition: .3s;
+      }
+      &::before {
+        width: 40px;
+        height: 20px;
+        top: 0;
+        right: 0px;
+        background: #ccc;
+        border-radius: 10px;
+      }
+      &::after {
+        top: 1px;
+        right: 19px;
+        width: 18px;
+        height: 18px;
+        background: #fff;
+        border-radius: 50%;
+      }
+      .setting-check:checked + & {
+        &::before {
+          background: $btnColor;
+        }
+        &::after {
+          right: 2px;
+        }
+      }
+    }
+  }
   .calculator {
     width: $buttonSize * 4 + 1;
     overflow: hidden;
@@ -136,6 +298,31 @@ export default class Calculator extends Vue {
     }
     &-title {
       font-size: map-get($fontSize, title);
+    }
+    &-setting {
+      color: #fff;
+      z-index: 101;
+      margin: 0;
+      font-size: 14px;
+      position: absolute;
+      width: 1em;
+      height: 1em;
+      cursor: pointer;
+      top: 5px;
+      left: 8px;
+      @media #{$not_sp} {
+        &:hover {
+          opacity: .8;
+        }
+      }
+      &-toggle {
+        display: none;
+      }
+    }
+  }
+  .icon {
+    &-toggle {
+      cursor: pointer;
     }
   }
   .toggleIsSide {
