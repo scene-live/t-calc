@@ -4,6 +4,7 @@
       <li class="btns-item is-small">
         <button
           class="btn btn-small"
+          :disabled="!isAllCLeared"
           @click="back"
         >
           <font-awesome-icon icon="reply" />
@@ -107,6 +108,7 @@ export default class Buttons extends Vue {
   @Prop() private actions!: [];
   @Prop() private histories!: [];
   @Prop() private isSide!: boolean;
+  @Prop() private isAllCLeared!: boolean;
 
   addActiveClass (operator: string) {
     if (operator === this.operator) return 'is-active'

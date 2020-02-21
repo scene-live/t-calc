@@ -17,6 +17,7 @@
           :actions="actions"
           :histories="histories"
           :isSide="isSide"
+          :isAllCLeared="isAllCLeared"
           @pushNumber="updateDisplay"
           @delete="deleteLastNumber"
           @pushAction="pushActionButton"
@@ -62,6 +63,7 @@ export default class Calculator extends Vue {
   errors = this.store.getErrors()
   histories = this.store.getHistories()
   calculating = this.store.getCalculating()
+  isAllCLeared = this.store.getIsAllCleared()
   numbers = CalculatorStore.NUMBERS
   operators = CalculatorStore.OPERATORS
   actions = CalculatorStore.ACTIONS
@@ -75,6 +77,7 @@ export default class Calculator extends Vue {
     this.errors = this.store.getErrors()
     this.histories = this.store.getHistories()
     this.calculating = this.store.getCalculating()
+    this.isAllCLeared = this.store.getIsAllCleared()
   }
 
   updateDisplay (value: string, isInput: boolean) {

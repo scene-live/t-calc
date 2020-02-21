@@ -15,6 +15,7 @@ export default class CalculatorStore {
   private history: History;
   private lastHistory: History;
   private isCalcurating: boolean;
+  private isAllCLeared: boolean;
 
   constructor () {
     this.current = '0'
@@ -36,6 +37,7 @@ export default class CalculatorStore {
       result: ''
     }
     this.isCalcurating = false
+    this.isAllCLeared = false
   }
 
   getCurrent () {
@@ -54,6 +56,10 @@ export default class CalculatorStore {
     return this.histories
   }
 
+  getIsAllCleared () {
+    return this.isAllCLeared
+  }
+
   // advice: NUMBERS ではなく NUMERIC＿KEYPAD など
   static NUMBERS = [7, 8, 9, 4, 5, 6, 1, 2, 3, 0, '.']
   static OPERATORS = ['÷', '×', '-', '+', '=']
@@ -62,6 +68,7 @@ export default class CalculatorStore {
   updateDisplay (value: string, isInput = false) {
     this.isCalcurating = true
     this.history.result = ''
+    this.isAllCLeared = false
 
     if (isInput) {
       this.inputNumber(value)
@@ -155,6 +162,7 @@ export default class CalculatorStore {
       rhs: null,
       result: ''
     }
+    this.isAllCLeared = true
   }
 
   switchNegativeNumber () {
@@ -253,5 +261,6 @@ export default class CalculatorStore {
       rhs: null,
       result: ''
     }
+    this.isAllCLeared = false
   }
 }

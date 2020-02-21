@@ -23,9 +23,16 @@ html {
   background: map-get($defaultButtonColor, background);
   font-size: map-get($fontSize, btn);
   cursor: pointer;
+  &:disabled {
+    cursor: not-allowed;
+    background: #ccc;
+  }
   @media #{$not_sp} {
     &:hover {
       opacity: .8;
+      &:disabled {
+        opacity: 1;
+      }
     }
   }
   &:focus {
