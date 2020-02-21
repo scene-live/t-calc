@@ -180,6 +180,8 @@ export default class CalculatorStore {
       return
     }
 
+    if (operator === '=') return
+
     this.temp = Number(this.current)
     this.operator = operator
     this.createHistory()
