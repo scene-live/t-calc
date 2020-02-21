@@ -25,14 +25,15 @@ html {
   cursor: pointer;
   &:disabled {
     cursor: not-allowed;
-    color: rgba(map-get($actionButtonColor, color), .3);
-    background: #ccc;
+    color: rgba($subColor, .3);
+    background: map-get($backgroundColors, base);
+    opacity: .6;
   }
   @media #{$not_sp} {
     &:hover {
       opacity: .8;
       &:disabled {
-        opacity: 1;
+        opacity: .6;
       }
     }
   }
@@ -48,24 +49,29 @@ html {
     background: map-get($actionButtonColor, background);
   }
   &-small {
-    color: map-get($actionButtonColor, color);
-    background: rgba(103, 158, 90, .6);
+    color: $subColor;
+    background: map-get($backgroundColors, base);
   }
   &-operators {
     font-size: map-get($fontSize, btnOperators);
   }
   &.is-clear {
-    color: #fff;
-    background: $attentionColor;
+    color: $attentionColor;
+    background: map-get($backgroundColors, base);
   }
   &.is-active {
-    color: #fff;
-    background: complement(map-get($defaultButtonColor, background))
+    color: $numberColor;
+    background: $btnColor;
   }
 }
 
 $sp: "only screen and (max-width: 767px)";
 $not_sp: "only screen and (min-width: 768px)";
+
+$btnColor: #e8831c;
+$numberColor: #fff;
+$subColor: rgba(148, 224, 130, .6);
+$attentionColor: #eb1e3d;
 
 $backgroundColors: (
   base: #222831,
@@ -73,21 +79,19 @@ $backgroundColors: (
 );
 
 $defaultButtonColor: (
-  color: #fff,
-  background: #e8831c,
-);
-
+  color: $btnColor,
+  background: map-get($backgroundColors, base),
+  );
+  
 $actionButtonColor: (
-  color: #111,
-  background: #aaa,
+  color: $btnColor,
+  background: map-get($backgroundColors, base),
 );
   
 $numberButtonColor: (
-  color: #111,
-  background: #ddd,
+  color: $numberColor,
+  background: map-get($backgroundColors, base),
 );
-
-$attentionColor: #eb1e3d;
 
 $fontSize: (
   title: 3.2rem,
@@ -95,7 +99,7 @@ $fontSize: (
   displayLong: 3rem,
   displayLonger: 2.5rem,
   btn: 1.8rem,
-  btnOperators: 2.2rem,
+  btnOperators: 2.5rem,
   history: 1.2rem,
   errors: 1.4rem,
 );

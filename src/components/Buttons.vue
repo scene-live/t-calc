@@ -176,8 +176,8 @@ export default class Buttons extends Vue {
       width: $buttonSize;
       height: $buttonHeight;
       line-height: $buttonSize;
-      border-top: 1px solid map-get($backgroundColors, base);
-      border-left: 1px solid map-get($backgroundColors, base);
+      border-top: 1px solid map-get($backgroundColors, display);
+      border-left: 1px solid map-get($backgroundColors, display);
       background: #fff;
       &.is-zero {
         width: $buttonSize * 2;

@@ -46,6 +46,7 @@ export default class History extends Vue {
       width: $buttonSize * 2;
       flex-basis: $buttonSize * 2;
       border-bottom: 1px solid map-get($backgroundColors, base);
+      border-left: 1px solid map-get($backgroundColors, display);
       position: absolute;
       top: 0;
       right: 0;
