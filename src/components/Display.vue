@@ -58,27 +58,27 @@ export default class Display extends Vue {
 <style scoped lang="scss">
   .display {
     text-align: right;
-    padding: 25px 10px 0 10px;
+    padding: 10px 10px 4px 10px;
     background: map-get($backgroundColors, display);
     color: #fff;
     font-size: map-get($fontSize, display);
     line-height: 1;
     display: flex;
+    flex-wrap: wrap;
     align-items: flex-end;
+    min-height: 90px;
     position: relative;
     z-index: 100;
+    > *  {
+      flex-basis: 100%;
+    }
     &-formula {
       font-size: map-get($fontSize, history);
-      margin: 0;
-      position: absolute;
-      top: 10px;
-      right: 10px;
+      margin: 0 0 15px 0;
     }
     &-number {
       margin: 0;
-      flex-basis: 100%;
       width: 100%;
-      min-height: 65px;
       display: block;
       appearance: none;
       text-align: right;
