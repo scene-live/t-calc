@@ -1,7 +1,7 @@
 <template>
   <div class="btns-wrap" ref="btns">
     <div class="btns-left">
-      <ul class="btns actions">
+      <ul class="btns">
         <li
           v-for="(action, index) in actions"
           :key="index"
@@ -9,12 +9,12 @@
         >
           <Button
             :text="action"
-            :className="['btn-actions', action === 'AC' ? 'is-clear' : '']"
+            :className="['btn-main', action === 'AC' ? 'is-clear' : '']"
             @pushButton="pushActionButton"
           />
         </li>
       </ul>
-      <ul class="btns numbers">
+      <ul class="btns">
         <li
           v-for="(number, index) in numbers"
           :key="index"
@@ -22,15 +22,15 @@
         >
           <Button
             :text="number"
-            className="btn-numbers"
+            className="btn-default"
             @pushButton="updateDisplay"
           />
         </li>
       </ul>
-      <ul class="btns actions">
+      <ul class="btns">
         <li class="btns-item is-small">
           <button
-            class="btn btn-small"
+            class="btn btn-sub"
             :disabled="!isAllCLeared"
             @click="back"
           >
@@ -39,7 +39,7 @@
         </li>
         <li class="btns-item is-small">
           <button
-            class="btn btn-small"
+            class="btn btn-sub"
             @click="showHistory"
           >
             <font-awesome-icon icon="history" />
@@ -47,7 +47,7 @@
         </li>
         <li class="btns-item is-small">
           <button
-            class="btn btn-small"
+            class="btn btn-sub"
             @click="deleteLastNumber"
           >
             <font-awesome-icon icon="backspace" />
@@ -55,7 +55,7 @@
         </li>
       </ul>
     </div>
-    <ul class="btns-right operators">
+    <ul class="btns-right">
       <li
         v-for="(operator, index) in operators"
         :key="index"
@@ -63,7 +63,7 @@
       >
         <Button
           :text="operator"
-          :className="[ 'btn-operators', addActiveClass(operator) ]"
+          :className="[ 'btn-main is-large', addActiveClass(operator) ]"
           @pushButton="pushOperationButton"
         />
       </li>
@@ -171,7 +171,6 @@ export default class Buttons extends Vue {
       &.is-equal {
         height: $buttonHeight * 2;
       }
-      &.is-small {}
     }
     &-left {
       flex-basis: $buttonSize * 3;

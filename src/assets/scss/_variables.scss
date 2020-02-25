@@ -23,7 +23,6 @@ html {
   background: map-get($defaultButtonColor, background);
   font-size: map-get($fontSize, btn);
   cursor: pointer;
-  &:disabled {}
   @media #{$not_sp} {
     &:hover {
       opacity: .8;
@@ -32,35 +31,40 @@ html {
   &:focus {
     outline: none;
   }
-  &-numbers {
-    color: map-get($numberButtonColor, color);
-    background: map-get($numberButtonColor, background);
+  &-default {
+    color: map-get($defaultButtonColor, color);
+    background: map-get($defaultButtonColor, background);
   }
-  &-actions {
-    color: map-get($actionButtonColor, color);
-    background: map-get($actionButtonColor, background);
+  &-main {
+    color: map-get($mainButtonColor, color);
+    background: map-get($mainButtonColor, background);
   }
-  &-small {
-    color: $subColor;
-    background: map-get($backgroundColors, base);
+  &-sub {
+    color: map-get($subButtonColor, color);
+    background: map-get($subButtonColor, background);
   }
-  &-operators {
+  &-attention {
+    color: map-get($attentionButtonColor, color);
+    background: map-get($attentionButtonColor, background);
+  }
+  &.is-large {
     font-size: map-get($fontSize, btnOperators);
   }
   &.is-clear {
-    color: $attentionColor;
-    background: map-get($backgroundColors, base);
+    color: map-get($attentionButtonColor, color);
+    background: map-get($attentionButtonColor, background);
   }
   &.is-active {
     color: $numberColor;
-    background: $btnColor;
+    background: $mainColor;
   }
 }
 
 $sp: "only screen and (max-width: 767px)";
 $not_sp: "only screen and (min-width: 768px)";
 
-$btnColor: #e8831c;
+$color: #fff;
+$mainColor: #e8831c;
 $numberColor: #fff;
 $subColor: rgba(148, 224, 130, .6);
 $attentionColor: #eb1e3d;
@@ -71,17 +75,22 @@ $backgroundColors: (
 );
 
 $defaultButtonColor: (
-  color: $btnColor,
-  background: map-get($backgroundColors, base),
-  );
-  
-$actionButtonColor: (
-  color: $btnColor,
+  color: $color,
   background: map-get($backgroundColors, base),
 );
-  
-$numberButtonColor: (
-  color: $numberColor,
+
+$mainButtonColor: (
+  color: $mainColor,
+  background: map-get($backgroundColors, base),
+);
+
+$subButtonColor: (
+  color: $subColor,
+  background: map-get($backgroundColors, base),
+);
+
+$attentionButtonColor: (
+  color: $attentionColor,
   background: map-get($backgroundColors, base),
 );
 

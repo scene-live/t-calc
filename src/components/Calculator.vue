@@ -206,13 +206,13 @@ export default class Calculator extends Vue {
       position: relative;
       padding: 0 10px 0;
       display: inline-block;
-      color: map-get($defaultButtonColor, color);
+      color: $mainColor;
       background: map-get($backgroundColors, base);
       &::before, &:after {
         content: '';
         display: block;
         height: 1px;
-        background: map-get($defaultButtonColor, color);;
+        background: $mainColor;
         position: absolute;
         bottom: 50%;
         left: 0;
@@ -282,7 +282,7 @@ export default class Calculator extends Vue {
       }
       .setting-check:checked + & {
         &::before {
-          background: $btnColor;
+          background: $mainColor;
         }
         &::after {
           right: 2px;
