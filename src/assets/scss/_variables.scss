@@ -50,10 +50,6 @@ html {
   &.is-large {
     font-size: map-get($fontSize, btnOperators);
   }
-  &.is-clear {
-    color: map-get($attentionButtonColor, color);
-    background: map-get($attentionButtonColor, background);
-  }
   &.is-active {
     color: $color;
     background: $mainColor;
