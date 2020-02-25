@@ -55,7 +55,7 @@ html {
     background: map-get($attentionButtonColor, background);
   }
   &.is-active {
-    color: $numberColor;
+    color: $color;
     background: $mainColor;
   }
 }
@@ -65,7 +65,6 @@ $not_sp: "only screen and (min-width: 768px)";
 
 $color: #fff;
 $mainColor: #e8831c;
-$numberColor: #fff;
 $subColor: rgba(148, 224, 130, .6);
 $attentionColor: #eb1e3d;
 
